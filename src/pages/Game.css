@@ -103,26 +103,51 @@
 }
 
 .rule-card {
-  background: var(--bg-secondary);
+  background: rgba(10, 10, 10, 0.9);
   padding: 40px;
   border-radius: 20px;
-  border: 2px solid var(--accent);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 3px solid;
+  border-image: linear-gradient(135deg, #ff00ff, #00ffff, #ff00ff) 1;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 255, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.6);
   min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  animation: neonPulse 3s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(255, 0, 255, 0.5),
+      0 0 40px rgba(0, 255, 255, 0.3),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 255, 0.8),
+      0 0 60px rgba(0, 255, 255, 0.5),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
 }
 
 .rule-title {
   font-size: 1.3rem;
-  color: var(--accent);
+  background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 24px 0;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
 }
 
 .rule-text {
@@ -131,6 +156,7 @@
   margin: 0;
   line-height: 1.6;
   font-weight: 500;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 .game-controls {

@@ -1,16 +1,106 @@
-# React + Vite
+# The Threefold Chaos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application mobile-first en dark mode pour le jeu de plateau Codename adapté au domaine du développement web, marketing digital et création.
 
-Currently, two official plugins are available:
+## 🎮 Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **3 niveaux de difficulté** : Junior Dev, Senior Dev, Tech Lead
+- **90+ règles aléatoires** (30 par niveau) basées sur le dev web, marketing et création
+- **Timer dynamique** : 30-40 secondes par règle avec alerte visuelle (5 dernières secondes en rouge)
+- **Interface néon** : Design dark mode avec effets néon cyberpunk
+- **Mobile-first** : Optimisé pour smartphone et tablette
 
-## React Compiler
+## 🚀 Démarrage rapide
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Développement local
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Ouvrez http://localhost:5173
+
+### Déploiement sur VPS avec Docker
+
+#### 1. Sur votre VPS, installez Docker et Docker Compose
+
+```bash
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+#### 2. Clonez le repository
+
+```bash
+git clone https://github.com/GarRomm/The_Threefold_Chaos.git
+cd The_Threefold_Chaos
+```
+
+#### 3. Lancez l'application
+
+```bash
+docker-compose up -d --build
+```
+
+#### 4. Accédez depuis votre mobile/tablette
+
+Ouvrez votre navigateur :
+```
+http://IP-DE-VOTRE-VPS:3000
+```
+
+## 🔧 Configuration
+
+### Changer le port
+
+Modifiez `docker-compose.yml` :
+```yaml
+ports:
+  - "VOTRE_PORT:80"
+```
+
+### HTTPS avec Let's Encrypt (recommandé)
+
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d votre-domaine.com
+```
+
+## 📱 PWA - Ajouter à l'écran d'accueil
+
+Sur mobile, ajoutez l'application à votre écran d'accueil pour une expérience type application native.
+
+## 🐳 Commandes Docker utiles
+
+```bash
+# Voir les logs
+docker-compose logs -f
+
+# Redémarrer
+docker-compose restart
+
+# Arrêter
+docker-compose down
+
+# Mettre à jour
+git pull
+docker-compose up -d --build
+```
+
+## 🛠 Stack technique
+
+- React 18
+- Vite
+- Docker + Nginx
+- CSS3 (animations néon)
+
+## 📄 License
+
+MIT
+

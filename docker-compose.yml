@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  threefold-chaos:
+    build: .
+    container_name: threefold-chaos
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
