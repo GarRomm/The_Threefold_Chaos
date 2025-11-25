@@ -93,6 +93,64 @@ git pull
 docker-compose up -d --build
 ```
 
+## 🤖 Déploiement automatique avec GitHub Actions
+
+Le projet est configuré pour un déploiement automatique sur votre VPS à chaque push sur la branche `main`.
+
+### Configuration initiale
+
+#### 1. Préparez votre VPS
+
+Sur votre VPS, créez le répertoire du projet et clonez le repository :
+
+```bash
+cd /home/votre-utilisateur
+git clone https://github.com/GarRomm/The_Threefold_Chaos.git
+cd The_Threefold_Chaos
+chmod +x deploy.sh
+```
+
+Modifiez le chemin dans `.github/workflows/deploy.yml` et `deploy.sh` pour qu'il corresponde à votre installation.
+
+#### 2. Configurez les secrets GitHub
+
+Dans votre repository GitHub, allez dans **Settings** → **Secrets and variables** → **Actions** → **New repository secret** et ajoutez :
+
+- `VPS_HOST` : L'adresse IP ou le nom de domaine de votre VPS
+- `VPS_USERNAME` : Votre nom d'utilisateur SSH (ex: `root` ou `ubuntu`)
+- `VPS_SSH_KEY` : Votre clé SSH privée (le contenu du fichier `~/.ssh/id_rsa`)
+- `VPS_PORT` : Le port SSH (généralement `22`)
+
+#### 3. Générez une clé SSH (si nécessaire)
+
+Sur votre machine locale :
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "github-actions"
+```
+
+Copiez la clé publique sur votre VPS :
+
+```bash
+ssh-copy-id -i ~/.ssh/id_rsa.pub votre-utilisateur@votre-vps
+```
+
+Copiez le contenu de la clé privée pour le secret `VPS_SSH_KEY` :
+
+```bash
+cat ~/.ssh/id_rsa
+```
+
+#### 4. Testez le déploiement
+
+Une fois configuré, chaque push sur `main` déclenchera automatiquement :
+
+1. Connexion SSH au VPS
+2. Pull des dernières modifications
+3. Reconstruction et redémarrage des conteneurs Docker
+
+Vous pouvez suivre le déploiement dans l'onglet **Actions** de votre repository GitHub.
+
 ## 🛠 Stack technique
 
 - React 18
