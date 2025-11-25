@@ -1,14 +1,53 @@
 export const rules = {
   easy: [
-    "",
-    ""
+    "Your hint word must start with a vowel (A, E, I, O, U)",
+    "You can only give hints related to Web Development terms on the board",
+    "Your hint word must rhyme with at least one word on the board",
+    "You must give your hint while standing up",
+    "Your hint word must have exactly 2 syllables",
+    "You can only give hints related to Design/UX/UI terms on the board",
+    "Your team must discuss in whispers for this round",
+    "The spymaster must give the hint without looking at the board",
+    "You can only give hints related to Digital Marketing terms on the board",
+    "Each guess must be made within 10 seconds (no discussion)",
+    "Your hint word must end with the letter 'R' or 'S'",
+    "You can only use one-syllable words for hints",
+    "The spymaster must give the hint with eyes closed",
+    "Your hint word must contain the letter 'E'",
+    "You can only use nouns for your hint word"
   ],
   medium: [
-    "",
-    ""
+    "Your hint word must be a color name",
+    "You must whisper your hint word (team discusses normally)",
+    "Each team member can only speak once during discussion",
+    "Your hint word must start with the same letter as your team color (B or P)",
+    "You can only give hints that start with consonants",
+    "The spymaster must draw the hint word instead of saying it",
+    "Your team must make their first guess within 5 seconds",
+    "You can only use adjectives for your hint word",
+    "Your hint word must relate to both Web Dev AND Design categories",
+    "The spymaster must give the hint with their back turned to the board",
+    "Your hint word must be an opposite/antonym concept",
+    "Your hint word cannot contain the letters 'A' or 'E'",
+    "Your team can only communicate through hand gestures during discussion",
+    "Your hint word must be exactly 4-6 letters long",
+    "Your hint word must be a real brand or company name"
   ],
   hard: [
-    "",
-    ""
+    "Your hint word must connect all three domains (Web Dev + Design + Marketing)",
+    "You can only use acronyms (3-4 letters max) as your hint word",
+    "The spymaster must say the hint word in a different language",
+    "Your hint word must be given as a one-sentence riddle/description",
+    "Your hint word must sound like a word on the board (homophone)",
+    "Your team must guess in reverse alphabetical order",
+    "The spymaster must sing/hum the hint word instead of saying it",
+    "Your hint word must be a portmanteau (blend of two real words)",
+    "Your hint word must reference a viral trend, meme, or pop culture",
+    "Each team member writes one guess, then you vote on the final choice",
+    "Your hint word must be a number or contain a number",
+    "The spymaster must spell the hint word backwards",
+    "Your hint word must be exactly 7+ letters long",
+    "Your hint word must rhyme with your team's color (Blue/Pink)",
+    "Your team must write down all guesses first, then reveal simultaneously"
   ]
 }
