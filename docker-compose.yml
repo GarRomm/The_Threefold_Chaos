@@ -6,6 +6,6 @@ services:
     container_name: threefold-chaos
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "5000:80"
     environment:
       - NODE_ENV=production
