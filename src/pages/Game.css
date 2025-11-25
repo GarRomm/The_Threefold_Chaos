@@ -167,6 +167,18 @@
   width: 100%;
 }
 
+.game-controls .btn-lexicon {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--bg-primary);
+  font-weight: 700;
+  border: none;
+}
+
+.game-controls .btn-lexicon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+}
+
 .back-btn-game {
   margin-top: 20px;
 }

@@ -53,8 +53,31 @@
   margin: 0;
 }
 
-.back-btn {
+.difficulty-actions {
+  display: flex;
+  gap: 16px;
   margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-lexicon {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--bg-primary);
+  font-weight: 700;
+  border: none;
+  padding: 16px 32px;
+  min-width: 180px;
+}
+
+.btn-lexicon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+}
+
+.back-btn {
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {

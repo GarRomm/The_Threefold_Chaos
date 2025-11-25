@@ -1,22 +1,25 @@
+import { useState } from 'react'
+import Lexicon from '../components/Lexicon'
 import './Difficulty.css'
 
 function Difficulty({ onSelectDifficulty, onBack }) {
+  const [showLexicon, setShowLexicon] = useState(false)
   const difficulties = [
     { 
       level: 'easy', 
-      label: 'Junior Dev', 
-      description: 'Beginner-friendly chaos',
+      label: 'Chaos Novice', 
+      description: 'Beginner-friendly rules',
       color: 'var(--success)'
     },
     { 
       level: 'medium', 
-      label: 'Senior Dev', 
+      label: 'Chaos Master', 
       description: 'Moderate mayhem',
       color: 'var(--warning)'
     },
     { 
       level: 'hard', 
-      label: 'Tech Lead', 
+      label: 'Chaos Legend', 
       description: 'Maximum disorder',
       color: 'var(--danger)'
     }
@@ -39,10 +42,18 @@ function Difficulty({ onSelectDifficulty, onBack }) {
             </button>
           ))}
         </div>
-        <button className="btn btn-secondary back-btn" onClick={onBack}>
-          ← Back
-        </button>
+        
+        <div className="difficulty-actions">
+          <button className="btn btn-lexicon" onClick={() => setShowLexicon(true)}>
+            📚 Lexicon
+          </button>
+          <button className="btn btn-secondary back-btn" onClick={onBack}>
+            ← Back
+          </button>
+        </div>
       </div>
+
+      {showLexicon && <Lexicon onClose={() => setShowLexicon(false)} />}
     </div>
   )
 }

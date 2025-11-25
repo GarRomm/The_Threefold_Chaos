@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { rules } from '../data/rules'
+import Lexicon from '../components/Lexicon'
 import './Game.css'
 
 function Game({ difficulty, onBack }) {
@@ -16,6 +17,8 @@ function Game({ difficulty, onBack }) {
   const [timeLeft, setTimeLeft] = useState(() => Math.floor(Math.random() * 11) + 30)
   const [isActive, setIsActive] = useState(true)
   const [neonColor, setNeonColor] = useState(() => getRandomNeonColor())
+  const [showLexicon, setShowLexicon] = useState(false)
+  const [wasActiveBefore, setWasActiveBefore] = useState(true)
 
   const getRandomRule = useCallback(() => {
     const availableRules = rules[difficulty].filter(
@@ -66,6 +69,17 @@ function Game({ difficulty, onBack }) {
     resetTimer()
   }
 
+  const openLexicon = () => {
+    setWasActiveBefore(isActive)
+    setIsActive(false)
+    setShowLexicon(true)
+  }
+
+  const closeLexicon = () => {
+    setShowLexicon(false)
+    setIsActive(wasActiveBefore)
+  }
+
   const isDanger = timeLeft <= 5
 
   return (
@@ -98,12 +112,17 @@ function Game({ difficulty, onBack }) {
           <button className="btn btn-primary" onClick={skipRule}>
             ⏭ Skip Rule
           </button>
+          <button className="btn btn-lexicon" onClick={openLexicon}>
+            📚 Lexicon
+          </button>
         </div>
 
         <button className="btn btn-secondary back-btn-game" onClick={onBack}>
           ← Back to Difficulty
         </button>
       </div>
+
+      {showLexicon && <Lexicon onClose={closeLexicon} />}
     </div>
   )
 }
