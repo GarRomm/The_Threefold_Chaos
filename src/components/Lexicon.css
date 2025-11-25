@@ -129,59 +129,62 @@
   white-space: nowrap;
 }
 
-.category-btn:hover {
+.category-btn:hover:not(.active) {
   border-color: var(--neon-purple);
   color: var(--neon-purple);
 }
 
 .category-btn.active {
-  color: var(--bg-primary);
   font-weight: 700;
 }
 
 /* Category specific colors */
-.category-all:hover {
+.category-all:hover:not(.active) {
   border-color: var(--text-primary);
   color: var(--text-primary);
 }
 
 .category-all.active {
-  background-color: var(--text-primary);
-  border-color: var(--text-primary);
-  box-shadow: 0 0 20px rgba(255, 237, 198, 0.4);
+  background-color: var(--text-primary) !important;
+  border-color: var(--text-primary) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 0 20px rgba(255, 237, 198, 0.4) !important;
 }
 
-.category-webdev:hover {
+.category-webdev:hover:not(.active) {
   border-color: var(--neon-blue);
   color: var(--neon-blue);
 }
 
 .category-webdev.active {
-  background-color: var(--neon-blue);
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  background-color: var(--neon-blue) !important;
+  border-color: var(--neon-blue) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4) !important;
 }
 
-.category-design:hover {
+.category-design:hover:not(.active) {
   border-color: var(--neon-pink);
   color: var(--neon-pink);
 }
 
 .category-design.active {
-  background-color: var(--neon-pink);
-  border-color: var(--neon-pink);
-  box-shadow: 0 0 20px rgba(255, 0, 153, 0.4);
+  background-color: var(--neon-pink) !important;
+  border-color: var(--neon-pink) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 0, 153, 0.4) !important;
 }
 
-.category-marketing:hover {
+.category-marketing:hover:not(.active) {
   border-color: var(--neon-green);
   color: var(--neon-green);
 }
 
 .category-marketing.active {
-  background-color: var(--neon-green);
-  border-color: var(--neon-green);
-  box-shadow: 0 0 20px rgba(68, 255, 0, 0.4);
+  background-color: var(--neon-green) !important;
+  border-color: var(--neon-green) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 0 20px rgba(68, 255, 0, 0.4) !important;
 }
 
 .lexicon-content {
