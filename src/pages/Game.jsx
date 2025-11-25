@@ -8,10 +8,14 @@ function Game({ difficulty, onBack }) {
     return rules[difficulty][randomIndex]
   }
 
+  const neonColors = ['#00E5FF', '#FF0099', '#44FF00', '#C300FF']
+  const getRandomNeonColor = () => neonColors[Math.floor(Math.random() * neonColors.length)]
+  
   const [currentRule, setCurrentRule] = useState(() => getInitialRule())
   const [usedRules, setUsedRules] = useState([])
   const [timeLeft, setTimeLeft] = useState(() => Math.floor(Math.random() * 11) + 30)
   const [isActive, setIsActive] = useState(true)
+  const [neonColor, setNeonColor] = useState(() => getRandomNeonColor())
 
   const getRandomRule = useCallback(() => {
     const availableRules = rules[difficulty].filter(
@@ -33,6 +37,7 @@ function Game({ difficulty, onBack }) {
     const randomTime = Math.floor(Math.random() * 11) + 30 // 30-40 seconds
     setTimeLeft(randomTime)
     setCurrentRule(getRandomRule())
+    setNeonColor(getRandomNeonColor())
   }, [getRandomRule])
 
   useEffect(() => {
@@ -43,6 +48,7 @@ function Game({ difficulty, onBack }) {
         if (prevTime <= 1) {
           const randomTime = Math.floor(Math.random() * 11) + 30
           setCurrentRule(getRandomRule())
+          setNeonColor(getRandomNeonColor())
           return randomTime
         }
         return prevTime - 1
@@ -76,8 +82,11 @@ function Game({ difficulty, onBack }) {
         </div>
 
         <div className="rule-container">
-          <div className="rule-card">
-            <h3 className="rule-title">Current Rule</h3>
+          <div className="rule-card" style={{
+            borderColor: neonColor,
+            boxShadow: `0 0 20px ${neonColor}40, 0 0 40px ${neonColor}20`
+          }}>
+            <h3 className="rule-title" style={{ color: neonColor }}>Current Rule</h3>
             <p className="rule-text">{currentRule}</p>
           </div>
         </div>
