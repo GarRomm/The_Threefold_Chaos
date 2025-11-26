@@ -118,7 +118,7 @@ jobs:
           description: |
             **The Threefold Chaos** is now live in production! 🎮
             
-            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+            🌐 **URL:** https://threefold.31.207.36.113.nip.io
             💚 **Status:** Healthy (HTTP ${{ steps.health.outputs.status }})
             📦 **Commit:** `${{ github.event.head_commit.message }}`
             👤 **By:** ${{ github.actor }}
@@ -153,9 +153,10 @@ jobs:
       - name: 🏥 Check Application Health
         id: health
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://threefold.31.207.36.113.nip.io)
+          STATUS=$(curl -k -s -o /dev/null -w "%{http_code}" https://threefold.31.207.36.113.nip.io || echo "000")
           echo "status=$STATUS" >> $GITHUB_OUTPUT
-          if [ $STATUS -ne 200 ]; then
+          echo "HTTP Status: $STATUS"
+          if [[ "$STATUS" != "200" ]]; then
             exit 1
           fi
 
@@ -169,7 +170,7 @@ jobs:
             **The Threefold Chaos** is running smoothly!
             
             ✅ **Status:** Healthy (HTTP ${{ steps.health.outputs.status }})
-            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+            🌐 **URL:** https://threefold.31.207.36.113.nip.io
           color: 0x00ff00
           username: "Health Monitor Bot"
           avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913133.png"
@@ -184,7 +185,7 @@ jobs:
             ⚠️ **The Threefold Chaos** is DOWN!
             
             ❌ **Status:** HTTP ${{ steps.health.outputs.status }}
-            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+            🌐 **URL:** https://threefold.31.207.36.113.nip.io
             
             @everyone - Application needs immediate attention!
           color: 0xff0000
