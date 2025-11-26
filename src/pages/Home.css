@@ -1,5 +1,37 @@
 .home-page {
   background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.character {
+  position: absolute;
+  height: 60vh;
+  max-height: 600px;
+  width: auto;
+  bottom: 0;
+  z-index: 2;
+  opacity: 0.9;
+  animation: characterFloat 4s ease-in-out infinite;
+}
+
+.character-left {
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.character-right {
+  right: 5%;
+  animation-delay: 2s;
+}
+
+@keyframes characterFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 .home-content {
@@ -58,6 +90,19 @@
 @media (max-width: 768px) {
   .logo {
     width: 150px;
+  }
+  
+  .character {
+    height: 40vh;
+    max-height: 400px;
+  }
+  
+  .character-left {
+    left: 2%;
+  }
+  
+  .character-right {
+    right: 2%;
   }
   
   .title {
