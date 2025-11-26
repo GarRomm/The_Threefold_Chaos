@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { rules } from '../data/rules'
 import Lexicon from '../components/Lexicon'
 import './Game.css'
@@ -21,12 +21,36 @@ function Game({ difficulty, onBack }) {
   const [neonColor, setNeonColor] = useState(() => getRandomNeonColor())
   const [showLexicon, setShowLexicon] = useState(false)
   const [wasActiveBefore, setWasActiveBefore] = useState(true)
+  const audioContextRef = useRef(null)
+  const hasPlayedWarningRef = useRef(false)
 
   const getTeamColor = (target) => {
     if (target === 'blue') return '#00E5FF' // Neon Blue
     if (target === 'pink') return '#FF0099' // Neon Pink
     return null // both teams - use random color
   }
+
+  const playBeep = useCallback(() => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)()
+    }
+    
+    const ctx = audioContextRef.current
+    const oscillator = ctx.createOscillator()
+    const gainNode = ctx.createGain()
+    
+    oscillator.connect(gainNode)
+    gainNode.connect(ctx.destination)
+    
+    oscillator.frequency.value = 800
+    oscillator.type = 'sine'
+    
+    gainNode.gain.setValueAtTime(0.3, ctx.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1)
+    
+    oscillator.start(ctx.currentTime)
+    oscillator.stop(ctx.currentTime + 0.1)
+  }, [])
 
   const getRandomRule = useCallback(() => {
     // 15% chance to have NO rule at all
@@ -64,6 +88,7 @@ function Game({ difficulty, onBack }) {
     // Use team color if target is specific, otherwise random
     const teamColor = getTeamColor(newRule.target)
     setNeonColor(teamColor || getRandomNeonColor())
+    hasPlayedWarningRef.current = false // Reset warning sound flag
   }, [getRandomRule, getRandomNeonColor])
 
   useEffect(() => {
@@ -78,14 +103,24 @@ function Game({ difficulty, onBack }) {
           // Use team color if target is specific, otherwise random
           const teamColor = getTeamColor(newRule.target)
           setNeonColor(teamColor || getRandomNeonColor())
+          hasPlayedWarningRef.current = false // Reset warning sound flag
           return randomTime
         }
+        
+        // Play beep sound during last 5 seconds
+        if (prevTime <= 5 && prevTime > 1 && !hasPlayedWarningRef.current) {
+          hasPlayedWarningRef.current = true
+        }
+        if (prevTime <= 5 && prevTime > 1) {
+          playBeep()
+        }
+        
         return prevTime - 1
       })
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [isActive, getRandomRule, getRandomNeonColor])
+  }, [isActive, getRandomRule, getRandomNeonColor, playBeep])
 
   const togglePause = () => {
     setIsActive(!isActive)
