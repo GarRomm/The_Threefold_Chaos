@@ -159,6 +159,23 @@
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
+.rule-hint {
+  font-size: 1rem;
+  margin: 16px 0 0 0;
+  font-style: italic;
+  opacity: 0.9;
+  animation: pulseHint 2s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .game-controls {
   display: flex;
   gap: 16px;

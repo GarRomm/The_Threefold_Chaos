@@ -10,7 +10,9 @@ function Game({ difficulty, onBack }) {
   }
 
   const neonColors = ['#00E5FF', '#FF0099', '#44FF00', '#C300FF']
-  const getRandomNeonColor = () => neonColors[Math.floor(Math.random() * neonColors.length)]
+  const getRandomNeonColor = useCallback(() => {
+    return neonColors[Math.floor(Math.random() * neonColors.length)]
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   
   const [currentRule, setCurrentRule] = useState(() => getInitialRule())
   const [usedRules, setUsedRules] = useState([])
@@ -31,7 +33,14 @@ function Game({ difficulty, onBack }) {
       return rules[difficulty][Math.floor(Math.random() * rules[difficulty].length)]
     }
 
-    const randomRule = availableRules[Math.floor(Math.random() * availableRules.length)]
+    // Random selection with 20% chance to show only if it's team-specific
+    let randomRule = availableRules[Math.floor(Math.random() * availableRules.length)]
+    
+    // 20% chance to hide team-specific rules randomly
+    if (randomRule.target !== 'both' && Math.random() < 0.2) {
+      randomRule = { ...randomRule, hidden: true }
+    }
+
     setUsedRules([...usedRules, randomRule])
     return randomRule
   }, [difficulty, usedRules])
@@ -41,7 +50,7 @@ function Game({ difficulty, onBack }) {
     setTimeLeft(randomTime)
     setCurrentRule(getRandomRule())
     setNeonColor(getRandomNeonColor())
-  }, [getRandomRule])
+  }, [getRandomRule, getRandomNeonColor])
 
   useEffect(() => {
     if (!isActive) return
@@ -59,7 +68,7 @@ function Game({ difficulty, onBack }) {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [isActive, getRandomRule])
+  }, [isActive, getRandomRule, getRandomNeonColor])
 
   const togglePause = () => {
     setIsActive(!isActive)
@@ -101,7 +110,12 @@ function Game({ difficulty, onBack }) {
             boxShadow: `0 0 20px ${neonColor}40, 0 0 40px ${neonColor}20`
           }}>
             <h3 className="rule-title" style={{ color: neonColor }}>Current Rule</h3>
-            <p className="rule-text">{currentRule}</p>
+            <p className="rule-text">{currentRule.text || currentRule}</p>
+            {currentRule.hidden && currentRule.target !== 'both' && (
+              <p className="rule-hint" style={{ color: neonColor }}>
+                ⚠️ This rule applies to a specific team only!
+              </p>
+            )}
           </div>
         </div>
 
