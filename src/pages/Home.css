@@ -11,7 +11,7 @@
   width: auto;
   bottom: 0;
   z-index: 2;
-  opacity: 0.9;
+  opacity: 1;
   animation: characterFloat 4s ease-in-out infinite;
 }
 
@@ -93,16 +93,7 @@
   }
   
   .character {
-    height: 40vh;
-    max-height: 400px;
-  }
-  
-  .character-left {
-    left: 2%;
-  }
-  
-  .character-right {
-    right: 2%;
+    display: none;
   }
   
   .title {
