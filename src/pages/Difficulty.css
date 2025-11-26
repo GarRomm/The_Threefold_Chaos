@@ -16,9 +16,9 @@
 
 .page-title {
   font-size: 2.5rem;
-  color: var(--text-pink);
+  color: var(--text-beige);
   margin: 0;
-  text-shadow: var(--glow-pink);
+  text-shadow: var(--glow-beige);
 }
 
 .difficulty-options {
