@@ -91,7 +91,17 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             cd /root/The_Threefold_Chaos
+            
+            # Clean up Docker resources to free disk space
+            echo "🧹 Cleaning Docker resources..."
+            docker system prune -af --volumes || true
+            
+            # Pull latest code
+            echo "📥 Pulling latest code..."
             git pull origin main
+            
+            # Build and deploy
+            echo "🏗️ Building and deploying..."
             docker-compose up -d --build
 
       - name: ✅ Health Check
