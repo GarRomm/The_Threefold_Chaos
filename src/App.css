@@ -26,6 +26,13 @@
   pointer-events: none;
   z-index: 1;
   opacity: 0.8;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .page-frame {
+    opacity: 0.4;
+  }
 }
 
 .btn {
