@@ -59,6 +59,15 @@
   font-weight: 700;
   color: var(--neon-blue);
   text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lexicon-title-icon {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) saturate(100%) invert(51%) sepia(98%) saturate(3566%) hue-rotate(167deg) brightness(103%) contrast(101%);
 }
 
 .lexicon-close {
