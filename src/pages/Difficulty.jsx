@@ -9,19 +9,25 @@ function Difficulty({ onSelectDifficulty, onBack }) {
       level: 'easy', 
       label: 'Chaos Novice', 
       description: 'Beginner-friendly rules',
-      color: 'var(--success)'
+      color: 'var(--success)',
+      glow: 'rgba(16, 185, 129, 0.6)',
+      glowSecondary: 'rgba(16, 185, 129, 0.3)'
     },
     { 
       level: 'medium', 
       label: 'Chaos Master', 
       description: 'Moderate mayhem',
-      color: 'var(--warning)'
+      color: 'var(--warning)',
+      glow: 'rgba(245, 158, 11, 0.6)',
+      glowSecondary: 'rgba(245, 158, 11, 0.3)'
     },
     { 
       level: 'hard', 
       label: 'Chaos Legend', 
       description: 'Maximum disorder',
-      color: 'var(--danger)'
+      color: 'var(--danger)',
+      glow: 'rgba(239, 68, 68, 0.6)',
+      glowSecondary: 'rgba(239, 68, 68, 0.3)'
     }
   ]
 
@@ -35,7 +41,11 @@ function Difficulty({ onSelectDifficulty, onBack }) {
               key={diff.level}
               className="difficulty-card"
               onClick={() => onSelectDifficulty(diff.level)}
-              style={{ '--card-color': diff.color }}
+              style={{ 
+                '--card-color': diff.color,
+                '--card-glow': diff.glow,
+                '--card-glow-secondary': diff.glowSecondary
+              }}
             >
               <h2 className="difficulty-label">{diff.label}</h2>
               <p className="difficulty-description">{diff.description}</p>

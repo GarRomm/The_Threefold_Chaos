@@ -26,25 +26,51 @@
 }
 
 .difficulty-card {
-  background-color: var(--bg-secondary);
+  background: rgba(10, 10, 10, 0.8);
   padding: 30px;
   border-radius: 16px;
-  border: 2px solid transparent;
+  border: 3px solid var(--card-color);
   transition: all 0.3s ease;
   text-align: center;
   width: 100%;
+  position: relative;
+  box-shadow: 
+    0 0 20px var(--card-glow),
+    0 8px 32px rgba(0, 0, 0, 0.6);
+  animation: neonGlow 2s ease-in-out infinite;
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px var(--card-glow),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 35px var(--card-glow),
+      0 0 50px var(--card-glow-secondary),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
 }
 
 .difficulty-card:hover {
   border-color: var(--card-color);
-  transform: translateX(8px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 
+    0 0 40px var(--card-glow),
+    0 0 60px var(--card-glow-secondary),
+    0 12px 40px rgba(0, 0, 0, 0.8);
 }
 
 .difficulty-label {
   font-size: 1.8rem;
   color: var(--card-color);
   margin: 0 0 10px 0;
+  text-shadow: 
+    0 0 10px var(--card-glow),
+    0 0 20px var(--card-glow);
+  font-weight: 700;
 }
 
 .difficulty-description {
