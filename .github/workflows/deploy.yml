@@ -97,12 +97,17 @@ jobs:
       - name: ✅ Health Check
         id: health
         run: |
-          sleep 10
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://threefold.31.207.36.113.nip.io)
+          echo "Waiting for deployment to complete..."
+          sleep 15
+          echo "Checking application health..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://threefold.31.207.36.113.nip.io || echo "000")
           echo "status=$STATUS" >> $GITHUB_OUTPUT
-          if [ $STATUS -ne 200 ]; then
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Health check failed with status $STATUS"
             exit 1
           fi
+          echo "Health check passed!"
 
       - name: 📢 Notify Discord - Deploy Success
         if: success()
