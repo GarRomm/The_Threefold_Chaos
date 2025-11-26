@@ -98,6 +98,16 @@
   border: none;
   padding: 16px 32px;
   min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.lexicon-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0);
 }
 
 .btn-lexicon:hover {

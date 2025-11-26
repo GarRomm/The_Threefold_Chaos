@@ -251,6 +251,16 @@
   color: var(--bg-primary);
   font-weight: 700;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.lexicon-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0);
 }
 
 .game-controls .btn-lexicon:hover {

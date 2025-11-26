@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Lexicon from '../components/Lexicon'
 import frame from '../assets/frame.svg'
+import detailsIcon from '../assets/details.png'
 import './Difficulty.css'
 
 function Difficulty({ onSelectDifficulty, onBack }) {
@@ -57,7 +58,8 @@ function Difficulty({ onSelectDifficulty, onBack }) {
         
         <div className="difficulty-actions">
           <button className="btn btn-lexicon" onClick={() => setShowLexicon(true)}>
-            📚 Lexicon
+            <img src={detailsIcon} alt="" className="lexicon-icon" />
+            Lexicon
           </button>
           <button className="btn btn-secondary back-btn" onClick={onBack}>
             ← Back

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { rules } from '../data/rules'
 import Lexicon from '../components/Lexicon'
 import frame from '../assets/frame.svg'
+import detailsIcon from '../assets/details.png'
 import './Game.css'
 
 function Game({ difficulty, onBack }) {
@@ -183,7 +184,8 @@ function Game({ difficulty, onBack }) {
             ⏭ Skip Rule
           </button>
           <button className="btn btn-lexicon" onClick={openLexicon}>
-            📚 Lexicon
+            <img src={detailsIcon} alt="" className="lexicon-icon" />
+            Lexicon
           </button>
         </div>
 
