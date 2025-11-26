@@ -24,7 +24,7 @@
 }
 
 .difficulty-badge {
-  background: #C300FF;
+  background: var(--neon-purple);
   padding: 12px 32px;
   border-radius: 24px;
   font-size: 1.2rem;
@@ -204,17 +204,17 @@
 
 .rule-title {
   font-size: 1.3rem;
-  color: #00E5FF;
+  color: var(--neon-blue);
   margin: 0 0 24px 0;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 600;
-  text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+  text-shadow: var(--glow-blue);
 }
 
 .rule-text {
   font-size: 1.8rem;
-  color: #FFEDC6;
+  color: var(--text-beige);
   margin: 0;
   line-height: 1.6;
   font-weight: 500;

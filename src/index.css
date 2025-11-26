@@ -5,19 +5,35 @@
 }
 
 :root {
+  /* Neon colors */
   --neon-blue: #00E5FF;
   --neon-pink: #FF0099;
   --neon-green: #44FF00;
   --neon-purple: #C300FF;
+  
+  /* Background colors */
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
+  
+  /* Text colors */
   --text-primary: #ffffff;
   --text-secondary: #b0b0b0;
+  --text-beige: #FFEDC6;
+  --text-pink: #FF0099;
+  
+  /* Accent colors */
   --accent: #6366f1;
   --accent-hover: #818cf8;
+  
+  /* Status colors */
   --danger: #ef4444;
   --success: #10b981;
   --warning: #f59e0b;
+  
+  /* Shadows and effects */
+  --glow-pink: 0 0 20px rgba(255, 0, 153, 0.5);
+  --glow-purple: 0 0 20px rgba(99, 102, 241, 0.5);
+  --glow-blue: 0 0 20px rgba(0, 229, 255, 0.5);
 }
 
 body {

@@ -16,9 +16,9 @@
 
 .page-title {
   font-size: 2.5rem;
-  color: #FF0099;
+  color: var(--text-pink);
   margin: 0;
-  text-shadow: 0 0 20px rgba(255, 0, 153, 0.5);
+  text-shadow: var(--glow-pink);
 }
 
 .difficulty-options {
@@ -78,7 +78,7 @@
 
 .difficulty-description {
   font-size: 1rem;
-  color: #FFEDC6;
+  color: var(--text-beige);
   margin: 0;
 }
 
