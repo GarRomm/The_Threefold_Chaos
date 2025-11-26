@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { lexicon } from '../data/lexicon'
+import scouterIcon from '../assets/scouterdbz.png'
 import './Lexicon.css'
 
 function Lexicon({ onClose }) {
@@ -29,13 +30,16 @@ function Lexicon({ onClose }) {
         </div>
 
         <div className="lexicon-filters">
-          <input
-            type="text"
-            className="lexicon-search"
-            placeholder="🔍 Search terms..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <div className="search-container">
+            <img src={scouterIcon} alt="" className="search-icon" />
+            <input
+              type="text"
+              className="lexicon-search"
+              placeholder="Search terms..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
           <div className="lexicon-categories">
             <button
