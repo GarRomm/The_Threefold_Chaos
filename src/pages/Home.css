@@ -11,6 +11,22 @@
   animation: fadeIn 0.6s ease-in;
 }
 
+.logo {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .title {
   font-size: 3rem;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
@@ -40,6 +56,10 @@
 }
 
 @media (max-width: 768px) {
+  .logo {
+    width: 150px;
+  }
+  
   .title {
     font-size: 2rem;
   }

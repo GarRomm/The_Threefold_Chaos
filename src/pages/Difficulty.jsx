@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Lexicon from '../components/Lexicon'
+import frame from '../assets/frame.svg'
 import './Difficulty.css'
 
 function Difficulty({ onSelectDifficulty, onBack }) {
@@ -33,6 +34,7 @@ function Difficulty({ onSelectDifficulty, onBack }) {
 
   return (
     <div className="page difficulty-page">
+      <img src={frame} alt="" className="page-frame" />
       <div className="difficulty-content">
         <h1 className="page-title">Select Difficulty</h1>
         <div className="difficulty-options">

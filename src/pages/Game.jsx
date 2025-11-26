@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { rules } from '../data/rules'
 import Lexicon from '../components/Lexicon'
+import frame from '../assets/frame.svg'
 import './Game.css'
 
 function Game({ difficulty, onBack }) {
@@ -145,6 +146,7 @@ function Game({ difficulty, onBack }) {
 
   return (
     <div className="page game-page">
+      <img src={frame} alt="" className="page-frame" />
       <div className="game-content">
         <div className="game-header">
           <h2 className="difficulty-badge">{difficulty.toUpperCase()}</h2>
