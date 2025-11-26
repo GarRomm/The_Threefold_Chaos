@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { lexicon } from '../data/lexicon'
 import scouterIcon from '../assets/scouterdbz.png'
+import detailsIcon from '../assets/details.png'
 import './Lexicon.css'
 
 function Lexicon({ onClose }) {
@@ -25,7 +26,10 @@ function Lexicon({ onClose }) {
     <div className="lexicon-overlay" onClick={onClose}>
       <div className="lexicon-modal" onClick={(e) => e.stopPropagation()}>
         <div className="lexicon-header">
-          <h2 className="lexicon-title">📚 Lexicon</h2>
+          <h2 className="lexicon-title">
+            <img src={detailsIcon} alt="" className="lexicon-title-icon" />
+            Lexicon
+          </h2>
           <button className="lexicon-close" onClick={onClose}>✕</button>
         </div>
 

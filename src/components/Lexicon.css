@@ -118,7 +118,6 @@
 
 .lexicon-search:focus {
   outline: none;
-  border-color: var(--neon-blue);
   box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
 }
 
