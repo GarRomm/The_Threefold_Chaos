@@ -122,6 +122,69 @@
   animation: neonPulse 3s ease-in-out infinite;
 }
 
+.rule-card.no-rule {
+  background: linear-gradient(135deg, rgba(68, 255, 0, 0.1), rgba(0, 229, 255, 0.1));
+  border-image: linear-gradient(135deg, #44FF00, #00E5FF, #44FF00) 1;
+  animation: freeRoundGlow 2s ease-in-out infinite;
+}
+
+.rule-card.team-blue {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(10, 10, 10, 0.9));
+  border-image: linear-gradient(135deg, #00E5FF, #00E5FF, #00E5FF) 1;
+  animation: blueTeamGlow 2s ease-in-out infinite;
+}
+
+.rule-card.team-pink {
+  background: linear-gradient(135deg, rgba(255, 0, 153, 0.15), rgba(10, 10, 10, 0.9));
+  border-image: linear-gradient(135deg, #FF0099, #FF0099, #FF0099) 1;
+  animation: pinkTeamGlow 2s ease-in-out infinite;
+}
+
+@keyframes blueTeamGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(0, 229, 255, 0.7),
+      0 0 50px rgba(0, 229, 255, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(0, 229, 255, 1),
+      0 0 80px rgba(0, 229, 255, 0.6),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes pinkTeamGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 153, 0.7),
+      0 0 50px rgba(255, 0, 153, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(255, 0, 153, 1),
+      0 0 80px rgba(255, 0, 153, 0.6),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes freeRoundGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(68, 255, 0, 0.6),
+      0 0 50px rgba(0, 229, 255, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(68, 255, 0, 0.9),
+      0 0 80px rgba(0, 229, 255, 0.6),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+}
+
 @keyframes neonPulse {
   0%, 100% {
     box-shadow: 

@@ -22,7 +22,18 @@ function Game({ difficulty, onBack }) {
   const [showLexicon, setShowLexicon] = useState(false)
   const [wasActiveBefore, setWasActiveBefore] = useState(true)
 
+  const getTeamColor = (target) => {
+    if (target === 'blue') return '#00E5FF' // Neon Blue
+    if (target === 'pink') return '#FF0099' // Neon Pink
+    return null // both teams - use random color
+  }
+
   const getRandomRule = useCallback(() => {
+    // 15% chance to have NO rule at all
+    if (Math.random() < 0.15) {
+      return { text: "No special rule this round - Play normally!", target: "both", noRule: true }
+    }
+
     const availableRules = rules[difficulty].filter(
       (rule) => !usedRules.includes(rule)
     )
@@ -47,9 +58,12 @@ function Game({ difficulty, onBack }) {
 
   const resetTimer = useCallback(() => {
     const randomTime = Math.floor(Math.random() * 11) + 30 // 30-40 seconds
+    const newRule = getRandomRule()
+    setCurrentRule(newRule)
     setTimeLeft(randomTime)
-    setCurrentRule(getRandomRule())
-    setNeonColor(getRandomNeonColor())
+    // Use team color if target is specific, otherwise random
+    const teamColor = getTeamColor(newRule.target)
+    setNeonColor(teamColor || getRandomNeonColor())
   }, [getRandomRule, getRandomNeonColor])
 
   useEffect(() => {
@@ -59,8 +73,11 @@ function Game({ difficulty, onBack }) {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
           const randomTime = Math.floor(Math.random() * 11) + 30
-          setCurrentRule(getRandomRule())
-          setNeonColor(getRandomNeonColor())
+          const newRule = getRandomRule()
+          setCurrentRule(newRule)
+          // Use team color if target is specific, otherwise random
+          const teamColor = getTeamColor(newRule.target)
+          setNeonColor(teamColor || getRandomNeonColor())
           return randomTime
         }
         return prevTime - 1
@@ -105,11 +122,13 @@ function Game({ difficulty, onBack }) {
         </div>
 
         <div className="rule-container">
-          <div className="rule-card" style={{
+          <div className={`rule-card ${currentRule.noRule ? 'no-rule' : ''} ${currentRule.target === 'blue' ? 'team-blue' : ''} ${currentRule.target === 'pink' ? 'team-pink' : ''}`} style={{
             borderColor: neonColor,
             boxShadow: `0 0 20px ${neonColor}40, 0 0 40px ${neonColor}20`
           }}>
-            <h3 className="rule-title" style={{ color: neonColor }}>Current Rule</h3>
+            <h3 className="rule-title" style={{ color: neonColor }}>
+              {currentRule.noRule ? '✨ Free Round ✨' : 'Current Rule'}
+            </h3>
             <p className="rule-text">{currentRule.text || currentRule}</p>
             {currentRule.hidden && currentRule.target !== 'both' && (
               <p className="rule-hint" style={{ color: neonColor }}>
