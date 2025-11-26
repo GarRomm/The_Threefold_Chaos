@@ -1,19 +1,88 @@
-name: Deploy to VPS
+name: Deploy & Monitor The Threefold Chaos
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Health check every hour
+    - cron: '0 * * * *'
 
 jobs:
-  deploy:
+  build:
+    name: Build & Test
     runs-on: ubuntu-latest
-    
+    if: github.event_name != 'schedule'
     steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build project
+        run: npm run build
+
+      - name: 📢 Notify Discord - Build Success
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "✅ Build Successful"
+          description: |
+            **The Threefold Chaos** build completed successfully
+            📦 Commit: `${{ github.event.head_commit.message }}`
+            👤 By: ${{ github.actor }}
+          color: 0x00ff00
+          username: "GitHub Actions Bot"
+          avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+      - name: 📢 Notify Discord - Build Failed
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "❌ Build Failed"
+          description: |
+            **The Threefold Chaos** build failed!
+            📦 Commit: `${{ github.event.head_commit.message }}`
+            👤 By: ${{ github.actor }}
+            🔗 [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          color: 0xff0000
+          username: "GitHub Actions Bot"
+          avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+  deploy:
+    name: Deploy to VPS
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📢 Notify Discord - Deploy Started
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "🚀 Deployment Started"
+          description: |
+            **The Threefold Chaos** is being deployed to production...
+            📦 Commit: `${{ github.event.head_commit.message }}`
+            👤 By: ${{ github.actor }}
+          color: 0xffff00
+          username: "GitHub Actions Bot"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to VPS
+      - name: 🚀 Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -22,4 +91,97 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             cd /root/The_Threefold_Chaos
-            bash deploy.sh
+            git pull origin main
+            docker-compose up -d --build
+
+      - name: ✅ Health Check
+        id: health
+        run: |
+          sleep 10
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://threefold.31.207.36.113.nip.io)
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          if [ $STATUS -ne 200 ]; then
+            exit 1
+          fi
+
+      - name: 📢 Notify Discord - Deploy Success
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "🎉 Deployment Successful"
+          description: |
+            **The Threefold Chaos** is now live in production! 🎮
+            
+            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+            💚 **Status:** Healthy (HTTP ${{ steps.health.outputs.status }})
+            📦 **Commit:** `${{ github.event.head_commit.message }}`
+            👤 **By:** ${{ github.actor }}
+          color: 0x0099ff
+          username: "GitHub Actions Bot"
+          avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+      - name: 📢 Notify Discord - Deploy Failed
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "💥 Deployment Failed"
+          description: |
+            **The Threefold Chaos** deployment failed!
+            
+            ❌ **Status:** Failed
+            📦 **Commit:** `${{ github.event.head_commit.message }}`
+            👤 **By:** ${{ github.actor }}
+            🔗 [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            @everyone - Production deployment needs attention!
+          color: 0xff0000
+          username: "GitHub Actions Bot"
+          avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+  health-check:
+    name: Scheduled Health Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: 🏥 Check Application Health
+        id: health
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://threefold.31.207.36.113.nip.io)
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          if [ $STATUS -ne 200 ]; then
+            exit 1
+          fi
+
+      - name: 📢 Notify Discord - Health OK
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "💚 Health Check Passed"
+          description: |
+            **The Threefold Chaos** is running smoothly!
+            
+            ✅ **Status:** Healthy (HTTP ${{ steps.health.outputs.status }})
+            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+          color: 0x00ff00
+          username: "Health Monitor Bot"
+          avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913133.png"
+
+      - name: 📢 Notify Discord - Health Failed
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "🚨 Health Check Failed"
+          description: |
+            ⚠️ **The Threefold Chaos** is DOWN!
+            
+            ❌ **Status:** HTTP ${{ steps.health.outputs.status }}
+            🌐 **URL:** http://threefold.31.207.36.113.nip.io
+            
+            @everyone - Application needs immediate attention!
+          color: 0xff0000
+          username: "Health Monitor Bot"
+          avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913133.png"
