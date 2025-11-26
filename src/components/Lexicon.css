@@ -246,13 +246,6 @@
   border: 2px solid transparent;
   border-radius: 12px;
   padding: 20px;
-  transition: all 0.3s ease;
-}
-
-.lexicon-card:hover {
-  border-color: var(--neon-green);
-  box-shadow: 0 0 20px rgba(68, 255, 0, 0.2);
-  transform: translateY(-4px);
 }
 
 .lexicon-card-header {
