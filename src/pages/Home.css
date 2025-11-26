@@ -64,17 +64,15 @@
 
 .title {
   font-size: 3rem;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #FF0099;
   margin: 0;
   line-height: 1.2;
+  text-shadow: 0 0 20px rgba(255, 0, 153, 0.5);
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: var(--text-secondary);
+  color: #FFEDC6;
   margin: 0;
   max-width: 500px;
 }
