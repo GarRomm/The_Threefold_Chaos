@@ -77,6 +77,21 @@
   max-width: 500px;
 }
 
+.btn-contact {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+  color: var(--bg-primary);
+  font-weight: 700;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(186, 104, 200, 0.6);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

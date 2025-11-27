@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import Lexicon from '../components/Lexicon'
+import ContactModal from '../components/ContactModal'
 import frame from '../assets/frame.svg'
 import detailsIcon from '../assets/details.png'
 import './Difficulty.css'
 
 function Difficulty({ onSelectDifficulty, onBack }) {
   const [showLexicon, setShowLexicon] = useState(false)
+  const [showContact, setShowContact] = useState(false)
   const difficulties = [
     { 
       level: 'easy', 
@@ -61,6 +63,9 @@ function Difficulty({ onSelectDifficulty, onBack }) {
             <img src={detailsIcon} alt="" className="lexicon-icon" />
             Lexicon
           </button>
+          <button className="btn btn-contact" onClick={() => setShowContact(true)}>
+            Contact
+          </button>
           <button className="btn btn-secondary back-btn" onClick={onBack}>
             ← Back
           </button>
@@ -68,6 +73,7 @@ function Difficulty({ onSelectDifficulty, onBack }) {
       </div>
 
       {showLexicon && <Lexicon onClose={() => setShowLexicon(false)} />}
+      {showContact && <ContactModal onClose={() => setShowContact(false)} />}
     </div>
   )
 }

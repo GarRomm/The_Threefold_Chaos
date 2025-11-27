@@ -119,6 +119,22 @@
   margin-top: 0;
 }
 
+.btn-contact {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+  color: var(--bg-primary);
+  font-weight: 700;
+  border: none;
+  padding: 16px 32px;
+  min-width: 180px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(186, 104, 200, 0.6);
+}
+
 @media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
