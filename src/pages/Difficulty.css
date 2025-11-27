@@ -92,7 +92,7 @@
 
 .btn-lexicon {
   background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-  color: var(--bg-primary);
+  color: var(--text-beige);
   font-weight: 700;
   border: none;
   padding: 16px 32px;
@@ -121,11 +121,12 @@
 
 .btn-contact {
   background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-  color: var(--bg-primary);
+  color: var(--text-beige);
   font-weight: 700;
   border: none;
   padding: 16px 32px;
-  min-width: 180px;
+  font-size: 18px;
+  font-weight: 600;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
