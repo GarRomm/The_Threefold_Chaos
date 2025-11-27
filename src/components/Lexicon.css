@@ -67,7 +67,6 @@
 .lexicon-title-icon {
   width: 28px;
   height: 28px;
-  filter: brightness(0) saturate(100%) invert(51%) sepia(98%) saturate(3566%) hue-rotate(167deg) brightness(103%) contrast(101%);
 }
 
 .lexicon-close {

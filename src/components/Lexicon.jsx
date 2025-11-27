@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { lexicon } from '../data/lexicon'
 import scouterIcon from '../assets/scouterdbz.png'
-import detailsIcon from '../assets/details.png'
+import detailsIcon from '../assets/DetailsV2.png'
 import './Lexicon.css'
 
 function Lexicon({ onClose }) {

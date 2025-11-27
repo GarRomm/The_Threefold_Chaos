@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { rules } from '../data/rules'
 import Lexicon from '../components/Lexicon'
 import frame from '../assets/frame.svg'
-import detailsIcon from '../assets/details.png'
+import detailsIcon from '../assets/DetailsV2.png'
 import './Game.css'
 
 function Game({ difficulty, onBack }) {

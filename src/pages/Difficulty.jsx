@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Lexicon from '../components/Lexicon'
 import ContactModal from '../components/ContactModal'
 import frame from '../assets/frame.svg'
-import detailsIcon from '../assets/details.png'
+import detailsIcon from '../assets/DetailsV2.png'
 import './Difficulty.css'
 
 function Difficulty({ onSelectDifficulty, onBack }) {

@@ -247,7 +247,7 @@
 
 .game-controls .btn-lexicon {
   background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-  color: var(--bg-primary);
+  color: var(--text-beige);
   font-weight: 700;
   border: none;
   display: flex;
@@ -260,7 +260,6 @@
 .lexicon-icon {
   width: 20px;
   height: 20px;
-  filter: brightness(0);
 }
 
 .game-controls .btn-lexicon:hover {
