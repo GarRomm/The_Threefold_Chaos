@@ -2,10 +2,10 @@ import './ContactModal.css'
 
 function ContactModal({ onClose }) {
   const creators = [
-    { name: 'Islem BENMOUNA', linkedin: '' },
-    { name: 'Ines SCHLEGEL', linkedin: '' },
-    { name: 'Irvin AHYI', linkedin: '' },
-    { name: 'Romain GARCIA', linkedin: '' }
+    { name: 'Islem BENMOUNA', role: 'Création Numérique', linkedin: 'https://www.linkedin.com/in/islem-benmouna/' },
+    { name: 'Ines SCHLEGEL', role: 'Création Numérique', linkedin: 'https://www.linkedin.com/in/in%C3%A8s-schlegel-b0980a29a/' },
+    { name: 'Irvin AHYI', role: 'Marketing Digital', linkedin: 'https://www.linkedin.com/in/irvin-ahyi-27383b30a/' },
+    { name: 'Romain GARCIA', role: 'Développeur Web', linkedin: 'https://www.linkedin.com/in/romain-hoyez/' }
   ]
 
   return (
@@ -16,7 +16,10 @@ function ContactModal({ onClose }) {
         <div className="creators-list">
           {creators.map((creator, index) => (
             <div key={index} className="creator-item">
-              <span className="creator-name">{creator.name}</span>
+              <div className="creator-info">
+                <span className="creator-name">{creator.name}</span>
+                <span className="creator-role">{creator.role}</span>
+              </div>
               {creator.linkedin && (
                 <a 
                   href={creator.linkedin} 

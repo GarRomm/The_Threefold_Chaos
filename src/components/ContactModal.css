@@ -99,10 +99,23 @@
     0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
+.creator-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .creator-name {
   font-size: 1.1rem;
   color: var(--text-beige);
   font-weight: 600;
+}
+
+.creator-role {
+  font-size: 0.9rem;
+  color: var(--neon-purple);
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .linkedin-link {
