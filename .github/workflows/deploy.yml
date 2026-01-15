@@ -1,5 +1,8 @@
 name: Deploy & Monitor The Threefold Chaos
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
