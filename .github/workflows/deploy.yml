@@ -8,8 +8,8 @@ on:
     branches:
       - main
   schedule:
-    # Health check every 12 hours
-    - cron: '0 */12 * * *'
+    # Health check once a week (Sunday at midnight UTC)
+    - cron: '0 0 * * 0'
 
 jobs:
   build:
