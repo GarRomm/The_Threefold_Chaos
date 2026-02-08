@@ -3,6 +3,9 @@ name: Deploy & Monitor The Threefold Chaos
 permissions:
   contents: read
 
+env:
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
 on:
   push:
     branches:
@@ -10,6 +13,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
   schedule:
     # Health check once a week (Sunday at midnight UTC)
     - cron: '0 0 * * 0'
@@ -36,7 +40,7 @@ jobs:
         run: npm run build
 
       - name: 📢 Notify Discord - Build Success
-        if: success()
+        if: success() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -50,7 +54,7 @@ jobs:
           avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 
       - name: 📢 Notify Discord - Build Failed
-        if: failure()
+        if: failure() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -68,9 +72,10 @@ jobs:
     name: Deploy to VPS
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
     steps:
       - name: 📢 Notify Discord - Deploy Started
+        if: env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -123,7 +128,7 @@ jobs:
           echo "Health check passed with status $STATUS!"
 
       - name: 📢 Notify Discord - Deploy Success
-        if: success()
+        if: success() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -140,7 +145,7 @@ jobs:
           avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 
       - name: 📢 Notify Discord - Deploy Failed
-        if: failure()
+        if: failure() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -174,7 +179,7 @@ jobs:
           fi
 
       - name: 📢 Notify Discord - Health OK
-        if: success()
+        if: success() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -189,7 +194,7 @@ jobs:
           avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913133.png"
 
       - name: 📢 Notify Discord - Health Failed
-        if: failure()
+        if: failure() && env.DISCORD_WEBHOOK != ''
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
